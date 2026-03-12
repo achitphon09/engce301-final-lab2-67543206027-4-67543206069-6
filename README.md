@@ -1,4 +1,8 @@
-# engce301-final-set2
+# Microservices Scale-Up + Cloud Deploy (Railway)
+
+## 👤 จัดทำโดย
+1. **นายอชิตพล โอชารส** รหัสนักศึกษา 67543206027-4
+2. **นายเมธิวัฒน์ ชมชื่น** รหัสนักศึกษา 67543206069-6
 
 ## URL ของ Service บน Production (Railway)
 

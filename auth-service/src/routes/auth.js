@@ -18,6 +18,66 @@ async function logEvent({ level, event, userId, message, meta }) {
 }
 
 // ─────────────────────────────────────────────
+// POST /api/auth/register — สมัครสมาชิกใหม่
+// ─────────────────────────────────────────────
+router.post('/register', async (req, res) => {
+  const { email, password, name } = req.body;
+
+  // Validate input
+  if (!email || !password || !name) {
+    return res.status(400).json({
+      error: 'กรุณากรอก email, password และ name'
+    });
+  }
+  if (password.length < 6) {
+    return res.status(400).json({
+      error: 'Password ต้องมีอย่างน้อย 6 ตัวอักษร'
+    });
+  }
+
+  try {
+    // Hash password
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    const result = await pool.query(
+      `INSERT INTO users (username, email, password_hash, role)
+       VALUES ($1, $2, $3, 'member')
+       RETURNING id, username, email, role`,
+      [name, email.toLowerCase(), passwordHash]
+    );
+
+    const user = result.rows[0];
+
+    // ออก JWT ให้เลย
+    const token = generateToken({
+      sub:      user.id,
+      email:    user.email,
+      role:     user.role,
+      username: user.username
+    });
+
+    console.log(`[AUTH] Register success: ${email}`);
+    res.status(201).json({
+      message: 'สมัครสมาชิกสำเร็จ',
+      token,
+      user: {
+        id:       user.id,
+        email:    user.email,
+        role:     user.role,
+        username: user.username
+      }
+    });
+
+  } catch (err) {
+    if (err.code === '23505') {  // unique violation
+      return res.status(409).json({ error: 'Email นี้ถูกใช้แล้ว' });
+    }
+    console.error('[AUTH] Register error:', err.message);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+// ─────────────────────────────────────────────
 // POST /api/auth/login
 // ❌ ไม่มี /register — ใช้ Seed Users เท่านั้น
 // ─────────────────────────────────────────────
