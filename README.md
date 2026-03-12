@@ -1,8 +1,12 @@
-# Microservices Scale-Up + Cloud Deploy (Railway)
+**ENGCE301 Final Lab:** [Set 1](https://github.com/achitphon09/engce301-final-lab1-67543206027-4-67543206069-6) | [Set 2](https://github.com/achitphon09/engce301-final-lab2-67543206027-4-67543206069-6)
+
+# Microservices Scale-Up + Cloud Deploy (Railway) - Final Lab (Set 2)
 
 ## 👤 จัดทำโดย
 1. **นายอชิตพล โอชารส** รหัสนักศึกษา 67543206027-4
 2. **นายเมธิวัฒน์ ชมชื่น** รหัสนักศึกษา 67543206069-6
+
+ข้อมูลเพิ่มเติมดูได้ที่ [MEMBER.md](MEMBER.md)
 
 ## URL ของ Service บน Production (Railway)
 
