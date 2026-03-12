@@ -1,11 +1,7 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host:     process.env.DB_HOST     || 'auth-db',
-  port:     parseInt(process.env.DB_PORT) || 5432,
-  database: process.env.DB_NAME     || 'auth_db',
-  user:     process.env.DB_USER     || 'auth_user',
-  password: process.env.DB_PASSWORD || 'auth_secret',
+  connectionString: process.env.DATABASE_URL || 'postgresql://auth_user:auth_secret@auth-db:5432/auth_db',
 });
 
 // Auto-create tables on startup

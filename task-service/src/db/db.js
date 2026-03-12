@@ -3,11 +3,7 @@ const fs   = require('fs');
 const path = require('path');
 
 const pool = new Pool({
-  host:     process.env.DB_HOST     || 'task-db',
-  port:     5432,
-  database: process.env.DB_NAME     || 'task_db',
-  user:     process.env.DB_USER     || 'task_user',
-  password: process.env.DB_PASSWORD || 'task_secret',
+  connectionString: process.env.DATABASE_URL || 'postgresql://task_user:task_secret@task-db:5432/task_db',
 });
 
 async function initDB() {

@@ -53,11 +53,7 @@ services:
   auth-service:
     build: ./auth-service
     environment:
-      DB_HOST:      auth-db
-      DB_PORT:      5432
-      DB_NAME:      authdb
-      DB_USER:      admin
-      DB_PASSWORD:  secret
+      DATABASE_URL: postgresql://admin:secret@auth-db:5432/authdb
       JWT_SECRET:   ${JWT_SECRET}
       JWT_EXPIRES:  ${JWT_EXPIRES}
       PORT:         3001
@@ -70,11 +66,7 @@ services:
   task-service:
     build: ./task-service
     environment:
-      DB_HOST:      task-db
-      DB_PORT:      5432
-      DB_NAME:      taskdb
-      DB_USER:      admin
-      DB_PASSWORD:  secret
+      DATABASE_URL: postgresql://admin:secret@task-db:5432/taskdb
       JWT_SECRET:   ${JWT_SECRET}
       PORT:         3002
     depends_on:
@@ -87,11 +79,7 @@ services:
   user-service:
     build: ./user-service
     environment:
-      DB_HOST:      user-db
-      DB_PORT:      5432
-      DB_NAME:      userdb
-      DB_USER:      admin
-      DB_PASSWORD:  secret
+      DATABASE_URL: postgresql://admin:secret@user-db:5432/userdb
       JWT_SECRET:   ${JWT_SECRET}
       PORT:         3003
     depends_on:
