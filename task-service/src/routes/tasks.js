@@ -4,14 +4,16 @@ const requireAuth   = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
-// Helper: ส่ง log
+// Helper: บันทึก log ลงฐานข้อมูลตัวเอง
 async function logEvent(data) {
   try {
-    await fetch('http://log-service:3003/api/logs/internal', {
-      method:  'POST', headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ service: 'task-service', ...data })
-    });
-  } catch (_) {}
+    await pool.query(
+      `INSERT INTO logs (level, event, user_id, message, meta) VALUES ($1, $2, $3, $4, $5)`,
+      [data.level, data.event, data.userId, data.message, data.meta]
+    );
+  } catch (err) {
+    console.error('[LOG ERROR]', err);
+  }
 }
 
 // GET /api/tasks/health
