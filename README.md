@@ -33,7 +33,7 @@ curl -X POST https://auth-service-production-559c.up.railway.app/api/auth/regist
 ```sh
 TOKEN=$(curl -s -X POST https://auth-service-production-559c.up.railway.app/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"myuser","password":"mypass"}' | jq -r '.token')
+  -d '{"email":"my@email.com","password":"mypass"}' | jq -r '.token')
 ```
 
 ### Create Task
