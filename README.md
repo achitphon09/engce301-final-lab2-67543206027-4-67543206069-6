@@ -19,3 +19,37 @@
 | Option | วิธี | ข้อดี | ข้อเสีย |
 |---|---|---|---|
 | **A** | **Frontend เรียก URL ของแต่ละ service โดยตรง** | ง่ายที่สุด ไม่ต้อง config เพิ่ม | Frontend ต้องรู้ URL ของทุก service |
+
+## คำสั่งที่ใช้ในการทดสอบ
+### Register
+```sh
+curl -X POST https://auth-service-production-559c.up.railway.app/api/auth/register \
+  -H "Content-Type: application/json" \
+  -d '{"username":"myuser","password":"mypass","email":"my@email.com"}'
+```
+
+### Login → เก็บ token
+```sh
+TOKEN=$(curl -s -X POST https://auth-service-production-559c.up.railway.app/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"myuser","password":"mypass"}' | jq -r '.token')
+```
+
+### Create Task
+```sh
+curl -X POST https://task-service-production-b94a.up.railway.app/api/tasks \
+  -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"My first cloud task"}'
+```
+
+### Get Profile
+```sh
+curl https://user-service-production-bf73.up.railway.app/api/users/profile \
+  -H "Authorization: Bearer $TOKEN"
+```
+
+### Test 401
+```sh
+curl https://task-service-production-b94a.up.railway.app/api/tasks   # ไม่ใส่ token → ต้องได้ 401
+```
