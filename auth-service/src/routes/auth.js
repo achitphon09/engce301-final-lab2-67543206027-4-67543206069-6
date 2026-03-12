@@ -5,17 +5,15 @@ const { generateToken, verifyToken } = require('../middleware/jwtUtils');
 
 const router = express.Router();
 
-// ── Helper: ส่ง log ไปที่ Log Service ────────────────────────────────
-async function logEvent({ service='auth-service', level, event, userId, ip, method, path, statusCode, message, meta }) {
+// ── Helper: บันทึก log ลงฐานข้อมูลตัวเอง ────────────────────────────────
+async function logEvent({ level, event, userId, message, meta }) {
   try {
-    await fetch(`http://log-service:3003/api/logs/internal`, {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ service, level, event, user_id: userId, ip_address: ip,
-                             method, path, status_code: statusCode, message, meta })
-    });
-  } catch (_) {
-    // ถ้า log service ไม่ตอบ ไม่ต้องหยุดการทำงาน
+    await pool.query(
+      `INSERT INTO logs (level, event, user_id, message, meta) VALUES ($1, $2, $3, $4, $5)`,
+      [level, event, userId, message, meta]
+    );
+  } catch (err) {
+    console.error('[LOG ERROR]', err);
   }
 }
 
