@@ -15,14 +15,28 @@
 **Bonus** Gateway nginx รวมทุก Service และ Frontend (พร้อม Rate Limit)
 - **Gateway URL**: [https://gateway-production-03ed.up.railway.app](https://gateway-production-03ed.up.railway.app/)
 
+## Screenshots
+- ![Railway Dashboard](screenshots/01_railway_dashboard.png)
+- ![Auth Register Cloud](screenshots/02_auth_register_cloud.png)
+- ![Auth Login Cloud](screenshots/03_auth_login_cloud.png)
+- ![Task Create Cloud](screenshots/04_task_create_cloud.png)
+- ![Task List Cloud](screenshots/05_task_list_cloud.png)
+- ![User Profile Cloud](screenshots/06_user_profile_cloud.png)
+- ![User Profile Update Cloud](screenshots/07_user_profile_update_cloud.png)
+- ![Task No JWT 401](screenshots/08_task_no_jwt_401.png)
+- ![Railway Env Variables](screenshots/09_railway_env_variables.png)
+- ![Readme Architecture](screenshots/10_readme_architecture.png)
+
 ## Phase 5: Gateway Strategy
 
-### วิธีที่เลือก: Option A (Frontend เรียก URL ของแต่ละ service โดยตรง)
+มีการใช้งานทั้ง **Option A** และ **Option B** รวมถึง **Bonus** ตามข้อกำหนดของโจทย์
 
-**เหตุผลที่เลือก:**
-- **ความง่าย (Simplicity)**: เป็นวิธีที่ง่ายที่สุดในการติดตั้ง เนื่องจากไม่ต้องตั้งค่า API Gateway หรือใช้ Nginx เป็น reverse proxy เพิ่มเติมบนสภาพแวดล้อม production
-- **การเข้าถึงโดยตรง**: แต่ละ service สามารถเข้าถึงได้โดยตรงผ่าน URL สาธารณะที่ Railway กำหนดให้
-- **ความเหมาะสม**: สำหรับขอบเขตของโปรเจกต์และสถาปัตยกรรม microservices บน Railway ในขณะนี้ วิธีนี้ตอบโจทย์ความต้องการโดยใช้ทรัพยากรน้อยที่สุด
+### Option A (Frontend เรียก URL ของแต่ละ service โดยตรง)
+- **Frontend** มีการชี้ Environment Variables (`AUTH_API`, `TASK_API`, `USER_API`) เพื่อยิงหน้าเว็บหาแต่ละ Microservice โดยตรง
+
+### Option B (สร้าง API Gateway บน Railway เพื่อ Route Traffic) และ Bonus
+- มีการใช้ **Nginx** ทำหน้าที่เป็น **Gateway** รวมทุก Service และ Frontend เข้าด้วยกันเป็น URL เดียวลดปัญหา CORS
+- **Bonus**: เพิ่มการคอนฟิก **Rate Limit** ภายใน Nginx Gateway เพื่อป้องกันการสแปมและโจมตีเบื้องต้น
 
 ---
 
@@ -38,7 +52,7 @@ curl -X POST https://auth-service-production-559c.up.railway.app/api/auth/regist
 ```sh
 TOKEN=$(curl -s -X POST https://auth-service-production-559c.up.railway.app/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"my@email.com","password":"mypass"}' | jq -r '.token')
+  -d '{"email":"alice@lab.local","password":"alice123"}' | jq -r '.token')
 ```
 
 ### Create Task
