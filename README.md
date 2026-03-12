@@ -10,6 +10,9 @@
 - **Task Service**: [https://task-service-production-b94a.up.railway.app](https://task-service-production-b94a.up.railway.app)
 - **User Service**: [https://user-service-production-bf73.up.railway.app](https://user-service-production-bf73.up.railway.app)
 
+**Bonus** Gateway nginx รวมทุก Service และ Frontend (พร้อม Rate Limit)
+- **Gateway URL**: [https://gateway-production-03ed.up.railway.app/](https://gateway-production-03ed.up.railway.app/)
+
 ## Phase 5: Gateway Strategy
 
 ### วิธีที่เลือก: Option A (Frontend เรียก URL ของแต่ละ service โดยตรง)
