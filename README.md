@@ -16,16 +16,16 @@
 - **Gateway URL**: [https://gateway-production-03ed.up.railway.app](https://gateway-production-03ed.up.railway.app/)
 
 ## Screenshots
-- ![Railway Dashboard](screenshots/01_railway_dashboard.png)
-- ![Auth Register Cloud](screenshots/02_auth_register_cloud.png)
-- ![Auth Login Cloud](screenshots/03_auth_login_cloud.png)
-- ![Task Create Cloud](screenshots/04_task_create_cloud.png)
-- ![Task List Cloud](screenshots/05_task_list_cloud.png)
-- ![User Profile Cloud](screenshots/06_user_profile_cloud.png)
-- ![User Profile Update Cloud](screenshots/07_user_profile_update_cloud.png)
-- ![Task No JWT 401](screenshots/08_task_no_jwt_401.png)
-- ![Railway Env Variables](screenshots/09_railway_env_variables.png)
-- ![Readme Architecture](screenshots/10_readme_architecture.png)
+- [1 - Railway Dashboard](screenshots/01_railway_dashboard.png)
+- [2 - Auth Register Cloud](screenshots/02_auth_register_cloud.png)
+- [3 - Auth Login Cloud](screenshots/03_auth_login_cloud.png)
+- [4 - Task Create Cloud](screenshots/04_task_create_cloud.png)
+- [5 - Task List Cloud](screenshots/05_task_list_cloud.png)
+- [6 - User Profile Cloud](screenshots/06_user_profile_cloud.png)
+- [7 - User Profile Update Cloud](screenshots/07_user_profile_update_cloud.png)
+- [8 - Task No JWT 401](screenshots/08_task_no_jwt_401.png)
+- [9 - Railway Env Variables](screenshots/09_railway_env_variables.png)
+- [10 - Readme Architecture](screenshots/10_readme_architecture.png)
 
 ## Phase 5: Gateway Strategy
 
