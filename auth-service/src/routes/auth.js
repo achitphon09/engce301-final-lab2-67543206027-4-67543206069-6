@@ -21,12 +21,12 @@ async function logEvent({ level, event, userId, message, meta }) {
 // POST /api/auth/register — สมัครสมาชิกใหม่
 // ─────────────────────────────────────────────
 router.post('/register', async (req, res) => {
-  const { email, password, name } = req.body;
+  const { email, password, username } = req.body;
 
   // Validate input
-  if (!email || !password || !name) {
+  if (!email || !password || !username) {
     return res.status(400).json({
-      error: 'กรุณากรอก email, password และ name'
+      error: 'กรุณากรอก email, password และ username'
     });
   }
   if (password.length < 6) {
@@ -43,7 +43,7 @@ router.post('/register', async (req, res) => {
       `INSERT INTO users (username, email, password_hash, role)
        VALUES ($1, $2, $3, 'member')
        RETURNING id, username, email, role`,
-      [name, email.toLowerCase(), passwordHash]
+      [username, email.toLowerCase(), passwordHash]
     );
 
     const user = result.rows[0];
